@@ -75,7 +75,10 @@
                     var removed = -0.25f * (totalCo2 / 400);
                     string message = " Filtered " + (removed * -1) + " CO2 in last 5 Minutes";
                     WorldLayerManager.Obj.ClimateSim.State.TotalCO2 += removed;
-                    layer.SetAtWorldPos(new Vector2i((int)Position.X, (int)Position.Z), -1f);
+                    if (layer.EntryWorldPos((int)Position.X, (int)Position.Z) > 0)
+                    {
+                        layer.SetAtWorldPos(new Vector2i((int)Position.X, (int)Position.Z), -1f);
+                    }
                     timeSent = WorldTime.Seconds;
                 }
             }
